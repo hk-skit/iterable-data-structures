@@ -28,24 +28,34 @@ export class LinkedList {
    * @returns
    * @memberof LinkedList
    */
-  [Symbol.iterator]() {
+  // [Symbol.iterator]() {
+  //   let current = this.head;
+  //   const iterable = {
+  //     next: () => {
+  //       if (current === null) {
+  //         return {
+  //           done: true
+  //         };
+  //       }
+  //       const { value, next } = current;
+  //       current = next;
+  //       return {
+  //         value,
+  //         done: false
+  //       };
+  //     }
+  //   };
+  //   return iterable;
+  // }
+
+  // Generator function.
+  *[Symbol.iterator]() {
     let current = this.head;
-    const iterable = {
-      next: () => {
-        if (current === null) {
-          return {
-            done: true
-          };
-        }
-        const { value, next } = current;
-        current = next;
-        return {
-          value,
-          done: false
-        };
-      }
-    };
-    return iterable;
+    while (current !== null) {
+      const { value } = current;
+      current = current.next;
+      yield value;
+    }
   }
 
   get isEmpty() {
