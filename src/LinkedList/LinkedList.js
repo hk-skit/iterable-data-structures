@@ -19,6 +19,7 @@ class Node {
 export class LinkedList {
   constructor() {
     this.head = null;
+    this.tail = null;
   }
 
   /**
@@ -61,14 +62,11 @@ export class LinkedList {
   add(value) {
     const node = new Node(value);
     if (this.head === null) {
-      this.head = node;
+      this.head = this.tail = node;
       return this;
     }
-    let current = this.head;
-    while (current.next !== null) {
-      current = current.next;
-    }
-    current.next = node;
+    this.tail.next = node;
+    this.tail = node;
     return this;
   }
 
@@ -91,6 +89,37 @@ export class LinkedList {
     const head = this.head;
     this.head = this.head.next;
     return head.value;
+  }
+
+  /**
+   * Removes the tail element.
+   *
+   * @memberof LinkedList
+   */
+  removeTail() {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const { value } = this.tail;
+    if (this.head === this.tail) {
+      // List with single node.
+      this.tail = this.head = null;
+      return value;
+    }
+
+    let prev = null;
+    let current = this.head;
+    while (current.next !== null) {
+      prev = current;
+      current = current.next;
+    }
+
+    // Adjust tail pointer.
+    prev.next = null;
+    this.tail = prev;
+
+    return value;
   }
 
   /**
