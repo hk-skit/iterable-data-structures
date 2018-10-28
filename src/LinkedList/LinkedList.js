@@ -62,13 +62,14 @@ export class LinkedList {
     const node = new Node(value);
     if (this.head === null) {
       this.head = node;
-      return;
+      return this;
     }
     let current = this.head;
     while (current.next !== null) {
       current = current.next;
     }
     current.next = node;
+    return this;
   }
 
   /**
@@ -89,7 +90,7 @@ export class LinkedList {
     }
     const head = this.head;
     this.head = this.head.next;
-    return head;
+    return head.value;
   }
 
   /**
@@ -108,13 +109,14 @@ export class LinkedList {
         current = next;
         continue;
       }
+      // If value is at head.
       if (prev === null) {
         this.head = next;
       } else {
         prev.next = next;
       }
-      return 1;
+      return x;
     }
-    return -1;
+    return null;
   }
 }

@@ -1,4 +1,4 @@
-import { LinkedList } from './LinkedList';
+import { LinkedList } from '../LinkedList/LinkedList';
 
 export class Stack {
   constructor() {
@@ -20,7 +20,8 @@ export class Stack {
   }
 
   push(value) {
-    this.list.addToHead(value);
+    this.list.addHead(value);
+    return this;
   }
 
   pop() {
