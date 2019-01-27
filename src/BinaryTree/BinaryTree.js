@@ -20,7 +20,7 @@ export class BinaryTree {
   /**
    * Iterator. Traverses in level order.
    *
-   * @memberof BinarySearchTree
+   * @memberof BinaryTree
    */
   *[Symbol.iterator]() {
     const queue = this.isEmpty ? [] : [this.root];
